@@ -56,16 +56,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1776901535,
-        "narHash": "sha256-OE2RpCCgVMcPVjodNuhx1sljGe63/Y5eLrIHsh91ZQs=",
+        "lastModified": 1779155601,
+        "narHash": "sha256-P54LzpO7Ze/HRGhW2Wo5cFxu3pkYXZSJ+uUb7tQbvbU=",
         "owner": "dogebox-wg",
         "repo": "dogeboxd",
-        "rev": "32d13f22256dabb02b2a55adbd4c62dff1225f4a",
+        "rev": "3547fec4e60c7df8570a00ef77391039bf9d541b",
         "type": "github"
       },
       "original": {
         "owner": "dogebox-wg",
-        "ref": "feature/backport-pre-release-updates-toggle",
+        "ref": "test/os-test-repo",
         "repo": "dogeboxd",
         "type": "github"
       }

@@ -21,7 +21,7 @@
     };
 
     dogeboxd = {
-      url = "github:dogebox-wg/dogeboxd?ref=feature/backport-pre-release-updates-toggle";
+      url = "github:dogebox-wg/dogeboxd?ref=test/os-test-repo";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
       inputs.dpanel-src.follows = "dpanel";
@@ -47,7 +47,7 @@
       ...
     }@inputs:
     let
-      dbxRelease = "v0.8.1";
+      dbxRelease = "v0.8.2";
 
       builderBases = {
         iso = ./nix/builders/iso/base.nix;
