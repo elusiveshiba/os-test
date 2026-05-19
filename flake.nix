@@ -15,7 +15,7 @@ rec {
     };
 
     dpanel = {
-      url = "github:dogebox-wg/dpanel?ref=feature/upgrade-route-flow";
+      url = "github:dogebox-wg/dpanel/main";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
@@ -97,7 +97,7 @@ rec {
           flakeLockContent = builtins.readFile flakeLock;
           migrationsJsonContent = builtins.toJSON {
             "pre_0.9_os_flake" = {
-              runs = 0;
+              ranSuccessfully = true;
               doNotRun = true;
             };
           };
@@ -132,7 +132,8 @@ rec {
               ."pre_0.9_os_flake" = (
                 (."pre_0.9_os_flake" // {})
                 + { "doNotRun": true }
-                + (if ((."pre_0.9_os_flake" // {}) | has("runs")) then {} else { "runs": 0 } end)
+                + { "ranSuccessfully": true }
+                | del(.runs)
               )
             ' "$migrations_json_path" > "$migrations_json_tmp"; then
               :
