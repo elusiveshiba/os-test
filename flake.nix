@@ -21,7 +21,7 @@ rec {
     };
 
     dogeboxd = {
-      url = "github:dogebox-wg/dogeboxd?ref=feature/upgrade-os-flake";
+      url = "github:dogebox-wg/dogeboxd?ref=feature/migrate-os-flake";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
       inputs.dpanel.follows = "dpanel";
