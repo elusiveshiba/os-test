@@ -15,20 +15,20 @@ rec {
     };
 
     dpanel = {
-      url = "github:dogebox-wg/dpanel";
+      url = "github:dogebox-wg/dpanel?ref=main";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
 
     dogeboxd = {
-      url = "github:dogebox-wg/dogeboxd";
+      url = "github:dogebox-wg/dogeboxd?ref=feature/upgrade-os-flake";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
       inputs.dpanel.follows = "dpanel";
     };
 
     dkm = {
-      url = "github:dogebox-wg/dkm";
+      url = "github:dogebox-wg/dkm?ref=main";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
@@ -51,7 +51,7 @@ rec {
       ...
     }@inputs:
     let
-      dbxRelease = "v0.9.0-rc.7";
+      dbxRelease = "v0.9.0-rc.8";
       upgradeFlakeDir = builtins.getEnv "DBX_UPGRADE_FLAKE_DIR";
       builderBases = {
         iso = ./nix/builders/iso/base.nix;

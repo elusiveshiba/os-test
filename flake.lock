@@ -19,6 +19,7 @@
       },
       "original": {
         "owner": "dogebox-wg",
+        "ref": "main",
         "repo": "dkm",
         "type": "github"
       }
@@ -56,15 +57,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1778817395,
-        "narHash": "sha256-U8/jG3pYogs/y3t5biI0VHeM6/s5T8dgIt9Y/xkpWss=",
+        "lastModified": 1777863423,
+        "narHash": "sha256-xlRDnUXPbti4xZEjuzJdumY0mWHcvbYPp+tGc5HZcJs=",
         "owner": "dogebox-wg",
         "repo": "dogeboxd",
-        "rev": "fc0d85f70a204725bc18fb72ec0859cb98a791b2",
+        "rev": "db4b5b81f8790eb7bd9eef4c345de7031e113730",
         "type": "github"
       },
       "original": {
         "owner": "dogebox-wg",
+        "ref": "feature/upgrade-os-flake",
         "repo": "dogeboxd",
         "type": "github"
       }
@@ -89,6 +91,7 @@
       },
       "original": {
         "owner": "dogebox-wg",
+        "ref": "main",
         "repo": "dpanel",
         "type": "github"
       }
