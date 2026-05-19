@@ -57,11 +57,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1779164320,
-        "narHash": "sha256-MU+ICJvkZGZ4uKQL6xVXxu6w8ilLN0zn9sZoFah+NKY=",
+        "lastModified": 1779167314,
+        "narHash": "sha256-U1KXcGPi4ODP2/2laEQGt+GUWTnCyT45fT8q9879XFY=",
         "owner": "dogebox-wg",
         "repo": "dogeboxd",
-        "rev": "0cc057a578ced2738a3b20295cdbc134cb673e93",
+        "rev": "858aceb2284d6a29dbd63b8c0d2f4ea63702e98e",
         "type": "github"
       },
       "original": {
@@ -82,16 +82,16 @@
         "playwright": "playwright"
       },
       "locked": {
-        "lastModified": 1776665351,
-        "narHash": "sha256-cMkHzWomzclhXjPIrDn2LuPAk6RhxlVy3SoW86r0eG0=",
+        "lastModified": 1779154354,
+        "narHash": "sha256-HQZrLsTF2FjkSoODyliba8prqDuUNd6uUiQnCxNcnOY=",
         "owner": "dogebox-wg",
         "repo": "dpanel",
-        "rev": "60a5c9020776ae47667de5f93941d18b86bd49cd",
+        "rev": "74f82c5e51eb616cf71786a2fc5994f81af24b96",
         "type": "github"
       },
       "original": {
         "owner": "dogebox-wg",
-        "ref": "main",
+        "ref": "feature/upgrade-route-flow",
         "repo": "dpanel",
         "type": "github"
       }

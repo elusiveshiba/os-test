@@ -15,7 +15,7 @@ rec {
     };
 
     dpanel = {
-      url = "github:dogebox-wg/dpanel?ref=main";
+      url = "github:dogebox-wg/dpanel?ref=feature/upgrade-route-flow";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
