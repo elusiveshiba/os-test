@@ -48,45 +48,10 @@
     "d /opt/dev 0770 shibe dogebox -"
   ];
 
-  systemd.services.dogebox-finish-profile-switch = {
-    description = "Finish interrupted Dogebox profile activation";
-    enable = !devMode;
-    before = [ "dogeboxd.service" ];
-    wantedBy = [ "multi-user.target" ];
-
-    path = [
-      pkgs.coreutils
-    ];
-
-    serviceConfig = {
-      Type = "oneshot";
-      RemainAfterExit = true;
-    };
-
-    script = ''
-      profile_system=$(readlink -f /nix/var/nix/profiles/system)
-      running_system=$(readlink -f /run/current-system)
-
-      if [ "$profile_system" = "$running_system" ]; then
-        echo "Dogebox recovery: current system already matches profile: $running_system"
-        exit 0
-      fi
-
-      echo "Dogebox recovery: current system $running_system does not match profile $profile_system; finishing activation"
-      /nix/var/nix/profiles/system/bin/switch-to-configuration switch
-    '';
-  };
-
   systemd.services.dogeboxd = {
     enable = !devMode;
-    after = [
-      "systemd-networkd-wait-online.service"
-      "dogebox-finish-profile-switch.service"
-    ];
-    wants = [
-      "systemd-networkd-wait-online.service"
-      "dogebox-finish-profile-switch.service"
-    ];
+    after = [ "systemd-networkd-wait-online.service" ];
+    wants = [ "systemd-networkd-wait-online.service" ];
     wantedBy = [ "multi-user.target" ];
     environment.DOGEBOX_RELEASE_REPOSITORY = "https://github.com/elusiveshiba/os-test.git";
 
