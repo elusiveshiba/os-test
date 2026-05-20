@@ -68,12 +68,62 @@
       running_system=$(readlink -f /run/current-system)
 
       if [ "$profile_system" = "$running_system" ]; then
-        echo "Current system already matches profile: $running_system"
+        echo "Dogebox recovery: current system already matches profile: $running_system"
         exit 0
       fi
 
-      echo "Current system $running_system does not match profile $profile_system; finishing activation"
+      echo "Dogebox recovery: current system $running_system does not match profile $profile_system; finishing activation"
       /nix/var/nix/profiles/system/bin/switch-to-configuration switch
+    '';
+  };
+
+  systemd.services.dogebox-restart-after-partial-upgrade = {
+    description = "Restart dogeboxd after partial Dogebox upgrade activation";
+    enable = !devMode;
+    after = [ "dogeboxd.service" ];
+    wantedBy = [ "multi-user.target" ];
+
+    path = [
+      pkgs.coreutils
+      pkgs.gnugrep
+      pkgs.systemd
+    ];
+
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+    };
+
+    script = ''
+      marker=/run/dogebox-restart-after-partial-upgrade.scheduled
+
+      if [ -e "$marker" ]; then
+        echo "Dogebox recovery: delayed dogeboxd restart already scheduled"
+        exit 0
+      fi
+
+      current_dbx=$(cat /opt/versioning/dbx 2>/dev/null || true)
+      if grep -q 'dbxRelease = "v0.9.0-rc.8"' /etc/nixos/flake.nix 2>/dev/null; then
+        flake_is_current=true
+      else
+        flake_is_current=false
+      fi
+
+      echo "Dogebox recovery: restart check current_dbx=$current_dbx flake_is_current=$flake_is_current"
+
+      if [ "$current_dbx" = "v0.9.0-rc.8" ] && [ "$flake_is_current" = true ]; then
+        echo "Dogebox recovery: no delayed dogeboxd restart needed"
+        exit 0
+      fi
+
+      touch "$marker"
+      echo "Dogebox recovery: scheduling delayed dogeboxd restart to continue OS flake migration"
+      systemd-run \
+        --unit=dogebox-delayed-migration-restart \
+        --description="Delayed dogeboxd restart for OS flake migration recovery" \
+        --on-active=20s \
+        --collect \
+        /run/current-system/sw/bin/systemctl restart dogeboxd.service
     '';
   };
 
@@ -86,6 +136,7 @@
     wants = [
       "systemd-networkd-wait-online.service"
       "dogebox-finish-profile-switch.service"
+      "dogebox-restart-after-partial-upgrade.service"
     ];
     wantedBy = [ "multi-user.target" ];
     environment.DOGEBOX_RELEASE_REPOSITORY = "https://github.com/elusiveshiba/os-test.git";
