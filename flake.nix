@@ -51,7 +51,7 @@ rec {
       ...
     }@inputs:
     let
-      dbxRelease = "v0.9.0-rc.8";
+      dbxRelease = "v0.9.0-rc.7";
       upgradeFlakeDir = builtins.getEnv "DBX_UPGRADE_FLAKE_DIR";
       builderBases = {
         iso = ./nix/builders/iso/base.nix;
@@ -125,9 +125,7 @@ rec {
 
           mkdir -p /opt/dogebox
           migrations_json_path=/opt/dogebox/migrations.json
-          if [ -f "$migrations_json_path" ]; then
-            :
-          else
+          if [ ! -f "$migrations_json_path" ]; then
             migrations_json_tmp=$(mktemp)
             printf '%s\n' '${migrationsJsonContent}' > "$migrations_json_tmp"
             install -o dogeboxd -g dogebox -m 0640 "$migrations_json_tmp" "$migrations_json_path"
